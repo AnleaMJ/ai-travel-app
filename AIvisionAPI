@@ -1,0 +1,1105 @@
+import '/backend/gemini/gemini.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:math';
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
+
+import 'a_ivision_a_p_i_model.dart';
+export 'a_ivision_a_p_i_model.dart';
+
+class AIvisionAPIWidget extends StatefulWidget {
+  const AIvisionAPIWidget({super.key});
+
+  @override
+  State<AIvisionAPIWidget> createState() => _AIvisionAPIWidgetState();
+}
+
+class _AIvisionAPIWidgetState extends State<AIvisionAPIWidget>
+    with TickerProviderStateMixin {
+  late AIvisionAPIModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = <String, AnimationInfo>{};
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => AIvisionAPIModel());
+
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'AIvisionAPI'});
+    _model.urlTextController ??= TextEditingController();
+    _model.urlFocusNode ??= FocusNode();
+    _model.urlFocusNode!.addListener(() => setState(() {}));
+    _model.quesTextController ??= TextEditingController();
+    _model.quesFocusNode ??= FocusNode();
+
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 400.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 400.0.ms,
+            begin: Offset(0.0, 140.0),
+            end: Offset(0.0, 0.0),
+          ),
+          TiltEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 400.0.ms,
+            begin: Offset(-0.175, 0),
+            end: Offset(0, 0),
+          ),
+        ],
+      ),
+      'containerOnActionTriggerAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: true,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 0.0),
+            end: Offset(115.0, 0.0),
+          ),
+        ],
+      ),
+      'columnOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 200.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 200.0.ms,
+            duration: 400.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 200.0.ms,
+            duration: 400.0.ms,
+            begin: Offset(0.0, 40.0),
+            end: Offset(0.0, 0.0),
+          ),
+          TiltEffect(
+            curve: Curves.easeInOut,
+            delay: 200.0.ms,
+            duration: 400.0.ms,
+            begin: Offset(0.873, 0),
+            end: Offset(0, 0),
+          ),
+        ],
+      ),
+    });
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: SafeArea(
+          top: true,
+          child: Align(
+            alignment: AlignmentDirectional(0, -1),
+            child: Padding(
+              padding: EdgeInsets.all(16),
+              child: Container(
+                width: double.infinity,
+                constraints: BoxConstraints(
+                  maxWidth: 1170,
+                ),
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: FlutterFlowTheme.of(context).alternate,
+                    width: 1,
+                  ),
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(16),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Align(
+                                  alignment: AlignmentDirectional(0, 0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        40, 10, 0, 5),
+                                    child: GradientText(
+                                      'Netra: ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .displaySmall
+                                          .override(
+                                            fontFamily: 'Urbanist',
+                                            fontSize: 30,
+                                            letterSpacing: 0,
+                                          ),
+                                      colors: [
+                                        FlutterFlowTheme.of(context).error,
+                                        FlutterFlowTheme.of(context).primaryText
+                                      ],
+                                      gradientDirection: GradientDirection.ltr,
+                                      gradientType: GradientType.linear,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 11, 0, 0),
+                                  child: Text(
+                                    'Vision Ai',
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .override(
+                                          fontFamily: 'Manrope',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 21,
+                                          letterSpacing: 0,
+                                        ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      70, 0, 0, 0),
+                                  child: FlutterFlowIconButton(
+                                    borderColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                    borderRadius: 12,
+                                    borderWidth: 1,
+                                    buttonSize: 40,
+                                    fillColor:
+                                        FlutterFlowTheme.of(context).accent1,
+                                    icon: Icon(
+                                      Icons.info_outlined,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      size: 24,
+                                    ),
+                                    onPressed: () async {
+                                      await launchURL(
+                                          'https://www.loom.com/share/8b0bcf4961204b9fb3e3c808be886a15?sid=dce9d9e4-656e-4d63-af38-d31b9596f2c4');
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              thickness: 1,
+                              color: FlutterFlowTheme.of(context).alternate,
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Get Ai Generated feedback on your location.',
+                                        style: FlutterFlowTheme.of(context)
+                                            .headlineSmall
+                                            .override(
+                                              fontFamily: 'Urbanist',
+                                              letterSpacing: 0,
+                                            ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 4, 0, 0),
+                                        child: Text(
+                                          'Enter a web url of a design image, i.e. from Dribbble by right clicking > \"copy image address\" and paste it below.',
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelMedium
+                                              .override(
+                                                fontFamily: 'Manrope',
+                                                letterSpacing: 0,
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                if (responsiveVisibility(
+                                  context: context,
+                                  phone: false,
+                                ))
+                                  Container(
+                                    width: 300,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .alternate,
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(4),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                setDarkModeSetting(
+                                                    context, ThemeMode.light);
+                                              },
+                                              child: Container(
+                                                width: 115,
+                                                height: 100,
+                                                decoration: BoxDecoration(
+                                                  color: Theme.of(context)
+                                                              .brightness ==
+                                                          Brightness.light
+                                                      ? FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondaryBackground
+                                                      : FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryBackground,
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                    color:
+                                                        valueOrDefault<Color>(
+                                                      Theme.of(context)
+                                                                  .brightness ==
+                                                              Brightness.light
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryBackground,
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .alternate,
+                                                    ),
+                                                    width: 1,
+                                                  ),
+                                                ),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.wb_sunny_rounded,
+                                                      color: Theme.of(context)
+                                                                  .brightness ==
+                                                              Brightness.light
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      size: 16,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  4, 0, 0, 0),
+                                                      child: Text(
+                                                        'Light Mode',
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Manrope',
+                                                              color: Theme.of(context)
+                                                                          .brightness ==
+                                                                      Brightness
+                                                                          .light
+                                                                  ? FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText
+                                                                  : FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                              letterSpacing: 0,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                setDarkModeSetting(
+                                                    context, ThemeMode.dark);
+                                              },
+                                              child: Container(
+                                                width: 115,
+                                                height: 100,
+                                                decoration: BoxDecoration(
+                                                  color: Theme.of(context)
+                                                              .brightness ==
+                                                          Brightness.dark
+                                                      ? FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondaryBackground
+                                                      : FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryBackground,
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                    color:
+                                                        valueOrDefault<Color>(
+                                                      Theme.of(context)
+                                                                  .brightness ==
+                                                              Brightness.dark
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryBackground,
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryBackground,
+                                                    ),
+                                                    width: 1,
+                                                  ),
+                                                ),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.nightlight_round,
+                                                      color: Theme.of(context)
+                                                                  .brightness ==
+                                                              Brightness.dark
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      size: 16,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  4, 0, 0, 0),
+                                                      child: Text(
+                                                        'Dark Mode',
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Manrope',
+                                                              color: Theme.of(context)
+                                                                          .brightness ==
+                                                                      Brightness
+                                                                          .dark
+                                                                  ? FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText
+                                                                  : FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                              letterSpacing: 0,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ).animateOnActionTrigger(
+                                              animationsMap[
+                                                  'containerOnActionTriggerAnimation']!,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    flex: 8,
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          width: double.infinity,
+                                          child: TextFormField(
+                                            controller:
+                                                _model.urlTextController,
+                                            focusNode: _model.urlFocusNode,
+                                            onChanged: (_) =>
+                                                EasyDebounce.debounce(
+                                              '_model.urlTextController',
+                                              Duration(milliseconds: 500),
+                                              () => setState(() {}),
+                                            ),
+                                            autofocus: true,
+                                            obscureText: false,
+                                            decoration: InputDecoration(
+                                              labelText:
+                                                  'Design Link (Image URL)...',
+                                              labelStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        letterSpacing: 0,
+                                                      ),
+                                              hintStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        letterSpacing: 0,
+                                                      ),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  width: 2,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  width: 2,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              errorBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .error,
+                                                  width: 2,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              focusedErrorBorder:
+                                                  OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .error,
+                                                  width: 2,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              filled: true,
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              contentPadding:
+                                                  EdgeInsetsDirectional
+                                                      .fromSTEB(20, 24, 20, 24),
+                                              suffixIcon: _model
+                                                      .urlTextController!
+                                                      .text
+                                                      .isNotEmpty
+                                                  ? InkWell(
+                                                      onTap: () async {
+                                                        _model.urlTextController
+                                                            ?.clear();
+                                                        setState(() {});
+                                                      },
+                                                      child: Icon(
+                                                        Icons.clear,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        size: 20,
+                                                      ),
+                                                    )
+                                                  : null,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Manrope',
+                                                  letterSpacing: 0,
+                                                ),
+                                            cursorColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                            validator: _model
+                                                .urlTextControllerValidator
+                                                .asValidator(context),
+                                          ),
+                                        ),
+                                        Container(
+                                          width: double.infinity,
+                                          child: TextFormField(
+                                            controller:
+                                                _model.quesTextController,
+                                            focusNode: _model.quesFocusNode,
+                                            autofocus: true,
+                                            obscureText: false,
+                                            decoration: InputDecoration(
+                                              labelStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        letterSpacing: 0,
+                                                      ),
+                                              hintText:
+                                                  'What should we do with this image?',
+                                              hintStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        letterSpacing: 0,
+                                                      ),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  width: 2,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  width: 2,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              errorBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .error,
+                                                  width: 2,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              focusedErrorBorder:
+                                                  OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .error,
+                                                  width: 2,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              filled: true,
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              contentPadding:
+                                                  EdgeInsetsDirectional
+                                                      .fromSTEB(20, 24, 20, 24),
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Manrope',
+                                                  letterSpacing: 0,
+                                                ),
+                                            maxLines: 16,
+                                            minLines: 6,
+                                            cursorColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                            validator: _model
+                                                .quesTextControllerValidator
+                                                .asValidator(context),
+                                          ),
+                                        ),
+                                        Container(
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .accent3,
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            border: Border.all(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .tertiary,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.all(12),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Developer Note (delete this)',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        letterSpacing: 0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 4, 0, 0),
+                                                  child: Text(
+                                                    'You will have to add your OpenAi API Key to the API Group Variables section in your FlutterFlow Project. Enter it in the Default value for \"api-key\".',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .labelSmall
+                                                        .override(
+                                                          fontFamily: 'Manrope',
+                                                          letterSpacing: 0,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        if (responsiveVisibility(
+                                          context: context,
+                                          tabletLandscape: false,
+                                          desktop: false,
+                                        ))
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 0, 16),
+                                            child: Container(
+                                              width: double.infinity,
+                                              height: 360,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .alternate,
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsets.all(4),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  child: Image.network(
+                                                    valueOrDefault<String>(
+                                                      _model.urlTextController
+                                                          .text,
+                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/web-test-flow-gu22qu/assets/7mhadljqaubd/upload_ImageURL@3x.png',
+                                                    ),
+                                                    width: 500,
+                                                    height: 360,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                      ].divide(SizedBox(height: 16)),
+                                    ),
+                                  ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      if (responsiveVisibility(
+                                        context: context,
+                                        phone: false,
+                                        tablet: false,
+                                      ))
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16, 0, 0, 0),
+                                          child: Container(
+                                            width: 500,
+                                            height: 360,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(4),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                child: Image.network(
+                                                  valueOrDefault<String>(
+                                                    _model
+                                                        .urlTextController.text,
+                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/web-test-flow-gu22qu/assets/7mhadljqaubd/upload_ImageURL@3x.png',
+                                                  ),
+                                                  width: 500,
+                                                  height: 360,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                    ].addToEnd(SizedBox(height: 16)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16, 0, 0, 0),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        context.pushNamed('AIvisionAPI');
+                                      },
+                                      text: 'Reset Page',
+                                      options: FFButtonOptions(
+                                        height: 36,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16, 0, 16, 0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0, 0, 0, 0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .accent1,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Manrope',
+                                              letterSpacing: 0,
+                                            ),
+                                        elevation: 0,
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(12),
+                                        hoverColor: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        hoverBorderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          width: 2,
+                                        ),
+                                        hoverTextColor:
+                                            FlutterFlowTheme.of(context).info,
+                                        hoverElevation: 3,
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(1, -1),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        await geminiTextFromImage(
+                                          context,
+                                          (_model.quesFocusNode?.hasFocus ??
+                                                  false)
+                                              .toString(),
+                                          imageNetworkUrl:
+                                              _model.urlTextController.text,
+                                        ).then((generatedText) {
+                                          safeSetState(() => _model.gemimgresp =
+                                              generatedText);
+                                        });
+
+                                        _model.imgresp = _model.gemimgresp;
+                                        setState(() {});
+
+                                        setState(() {});
+                                      },
+                                      text: 'Analyze Design',
+                                      options: FFButtonOptions(
+                                        height: 44,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            24, 0, 24, 0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0, 0, 0, 0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Manrope',
+                                              letterSpacing: 0,
+                                            ),
+                                        elevation: 3,
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(12),
+                                        hoverColor: FlutterFlowTheme.of(context)
+                                            .accent1,
+                                        hoverBorderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          width: 2,
+                                        ),
+                                        hoverTextColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                        hoverElevation: 0,
+                                      ),
+                                    ),
+                                  ),
+                                ].divide(SizedBox(width: 16)),
+                              ),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              constraints: BoxConstraints(
+                                maxWidth: 630,
+                              ),
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Divider(
+                                      thickness: 1,
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 4, 0, 0),
+                                      child: Text(
+                                        'Here is your analysis:',
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Manrope',
+                                              letterSpacing: 0,
+                                            ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 8, 16, 0),
+                                      child: SelectionArea(
+                                          child: Text(
+                                        valueOrDefault<String>(
+                                          _model.gemimgresp,
+                                          'Response',
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .override(
+                                              fontFamily: 'Manrope',
+                                              letterSpacing: 0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      )),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 16, 0, 0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          await Clipboard.setData(ClipboardData(
+                                              text: _model.gemimgresp!));
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'You have successfully copied the feedback.',
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
+                                            ),
+                                          );
+                                        },
+                                        text: 'Copy Response',
+                                        options: FFButtonOptions(
+                                          height: 36,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16, 0, 16, 0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 0, 0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .accent1,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Manrope',
+                                                    letterSpacing: 0,
+                                                  ),
+                                          elevation: 0,
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            width: 2,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          hoverColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          hoverBorderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            width: 2,
+                                          ),
+                                          hoverTextColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          hoverElevation: 3,
+                                        ),
+                                      ),
+                                    ),
+                                  ].addToEnd(SizedBox(height: 44)),
+                                ),
+                              ).animateOnPageLoad(
+                                  animationsMap['columnOnPageLoadAnimation']!),
+                            ),
+                          ].addToEnd(SizedBox(height: 44)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ).animateOnPageLoad(
+                  animationsMap['containerOnPageLoadAnimation']!),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
