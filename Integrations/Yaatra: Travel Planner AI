@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -79,7 +80,7 @@ class _YaatraWidgetState extends State<YaatraWidget> {
                                   alignment: AlignmentDirectional(0, 0),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        40, 0, 0, 5),
+                                        0, 0, 0, 5),
                                     child: GradientText(
                                       'Yaatra: ',
                                       style: FlutterFlowTheme.of(context)
@@ -187,65 +188,73 @@ class _YaatraWidgetState extends State<YaatraWidget> {
                                   ),
                                   child: Stack(
                                     children: [
-                                      Opacity(
-                                        opacity: 0,
-                                        child: Align(
-                                          alignment: AlignmentDirectional(0, 0),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 5, 0, 0),
+                                        child: Container(
+                                          constraints: BoxConstraints(
+                                            maxWidth: () {
+                                              if (MediaQuery.sizeOf(context)
+                                                      .width >=
+                                                  1170.0) {
+                                                return 700.0;
+                                              } else if (MediaQuery.sizeOf(
+                                                          context)
+                                                      .width <=
+                                                  470.0) {
+                                                return 330.0;
+                                              } else {
+                                                return 530.0;
+                                              }
+                                            }(),
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .accent1,
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(0),
+                                              bottomRight: Radius.circular(12),
+                                              topLeft: Radius.circular(12),
+                                              topRight: Radius.circular(12),
+                                            ),
+                                            border: Border.all(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              width: 2,
+                                            ),
+                                          ),
                                           child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    12, 0, 12, 0),
-                                            child: ListView(
-                                              padding: EdgeInsets.zero,
-                                              scrollDirection: Axis.vertical,
+                                                    12, 8, 12, 8),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    color: Color(0xFFF0F589),
+                                                SelectionArea(
+                                                    child: AutoSizeText(
+                                                  valueOrDefault<String>(
+                                                    _model.output,
+                                                    'Hi there, I\'m here to help you with your travelling. Ask me anything!',
+                                                  ).maybeHandleOverflow(
+                                                    maxChars: 800,
+                                                    replacement: '…',
                                                   ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 17, 0, 0),
-                                                  child: SingleChildScrollView(
-                                                    scrollDirection:
-                                                        Axis.horizontal,
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [],
-                                                    ),
-                                                  ),
-                                                ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        letterSpacing: 0,
+                                                        lineHeight: 1.5,
+                                                      ),
+                                                )),
                                               ],
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      Align(
-                                        alignment:
-                                            AlignmentDirectional(-0.85, -0.94),
-                                        child: SelectionArea(
-                                            child: Text(
-                                          valueOrDefault<String>(
-                                            _model.output,
-                                            'Hi there, I\'m here to help you with your travelling. Ask me anything!',
-                                          ).maybeHandleOverflow(
-                                            maxChars: 800,
-                                            replacement: '…',
-                                          ),
-                                          textAlign: TextAlign.start,
-                                          maxLines: 100,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Manrope',
-                                                letterSpacing: 0,
-                                              ),
-                                        )),
                                       ),
                                     ],
                                   ),
@@ -280,7 +289,7 @@ class _YaatraWidgetState extends State<YaatraWidget> {
                                         textInputAction: TextInputAction.send,
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          hintText: 'Ask me anything',
+                                          hintText: 'Ask Yaatra...',
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
                                                   .bodySmall
@@ -371,7 +380,7 @@ class _YaatraWidgetState extends State<YaatraWidget> {
                                       Icons.send_rounded,
                                       color:
                                           FlutterFlowTheme.of(context).primary,
-                                      size: 45,
+                                      size: 39,
                                     ),
                                     showLoadingIndicator: true,
                                     onPressed: () async {
